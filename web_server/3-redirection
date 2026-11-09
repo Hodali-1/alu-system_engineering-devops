@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Installs nginx, serves Holberton School, and redirects /redirect_me with a 301
+apt-get update -y
+apt-get install -y nginx
+echo "Holberton School for the win!" > /var/www/html/index.html
+cat > /etc/nginx/sites-available/default << 'CONF'
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+    rewrite ^/redirect_me https://gateteirene.netlify.app permanent;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+CONF
+service nginx restart
