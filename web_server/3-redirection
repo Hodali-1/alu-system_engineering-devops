@@ -6,7 +6,6 @@ echo "Holberton School for the win!" > /var/www/html/index.html
 cat > /etc/nginx/sites-available/default << 'CONF'
 server {
     listen 80 default_server;
-    listen [::]:80 default_server;
     root /var/www/html;
     index index.html;
     server_name _;
